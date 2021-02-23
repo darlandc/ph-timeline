@@ -8,20 +8,41 @@ console.log(2)
 
 const PostList = () => (
     <Query query={gql`
-        {
-            Post {
-                title
-            }
+ query {
+ posts(order: VOTES) {
+    pageInfo{
+      endCursor
+    }
+    edges {
+      cursor,
+      node {
+        id,
+        tagline,
+        url,
+        thumbnail{
+          url
         }
+        user{
+          username,
+        },
+        votesCount,
+        commentsCount,
+        name,
+        createdAt
+      }
+    }
+  }
+}
     `}
     >
         {({loading, error, data}) => {
             if (loading) return <p>Loading ...</p>;
             if (error) return <p>Error :(</p>;
-            
-            return data.allPosts.map((currentPost) => (
-                <Post post={currentPost} />
-            ));
+
+           const allPosts = data.posts.edges;
+return null
+
+
         }}
     </Query>
 );

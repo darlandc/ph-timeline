@@ -29,16 +29,18 @@ const Button = styled.button`
 
 
 const Post = (props) => (
-    <div className="card" style={{'width': '100%', 'marginTop': '10px'}}>
-        <div className="card-body">
-            <h5 className="card-title">{props.post.title}</h5>
-            <h6 className="card-subtitle mb-2 text-muted">{props.post.title}</h6>
-            <p className="card-text">{props.course.title}</p>
+    <div style={{'width': '100%', 'marginTop': '10px'}}>
+        <div>
+            <h5>{props.tagline}</h5> 
+            <p>{props.thumbnail}</p>
             <Button>test</Button>
-            <a href={props.post.url} className="card-link"></a>
+            <a href={props.url} ></a>
         </div>
+        
     </div>
 );
+
+
 
 export default Post;
 
