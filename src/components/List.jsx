@@ -4,41 +4,17 @@ import gql from 'graphql-tag';
 
 import Post from './Post';
 
-console.log(2)
+import GET_POSTS from '../queries/index';
 
 const PostList = () => (
-    <Query query={gql`
- query {
- posts(order: VOTES) {
-    pageInfo{
-      endCursor
-    }
-    edges {
-      cursor,
-      node {
-        id,
-        tagline,
-        url,
-        thumbnail{
-          url
-        }
-        user{
-          username,
-        },
-        votesCount,
-        commentsCount,
-        name,
-        createdAt
-      }
-    }
-  }
-}
-    `}
-    >
+    <Query query={GET_POSTS}>
         {({loading, error, data}) => {
+
+          let posts;
+          data ? posts = data.posts.edges : error = true;
+
             if (loading) return <p>Loading ...</p>;
             if (error) return <p>Error :(</p>;
-              const posts = data.posts.edges;
               let list = posts.map(post => 
                 <Post key={post.node.name} postInfo={post.node}/>
               );

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { ApolloProvider } from 'react-apollo';
-import client from '../client';
-import PostList from '../components/Posts/List';
+import client from '../../client';
+import PostList from '../../components/List';
 
 console.log(3)
 
