@@ -1,39 +1,22 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 
-
-// Create a Title component that'll render an <h1> tag with some styles
 const Title = styled.h1`
   font-size: 1.5em;
   text-align: center;
-  color: palevioletred;
+  color: #5B5EA6;
 `;
 
-// Create a Wrapper component that'll render a <section> tag with some styles
-const Wrapper = styled.section`
-  padding: 4em;
-  background: papayawhip;
+const Card = styled.section`
+  padding: 0;
+  border: 1px solid red;
 `;
-
-const Button = styled.button`
-  /* Adapt the colors based on primary prop */
-  background: ${props => props.primary ? "palevioletred" : "white"};
-  color: ${props => props.primary ? "white" : "palevioletred"};
-
-  font-size: 1em;
-  margin: 1em;
-  padding: 0.25em 1em;
-  border: 2px solid palevioletred;
-  border-radius: 3px;
-`;
-
 
 const Post = ({postInfo}) => (
     <div style={{'width': '100%', 'marginTop': '10px'}}>
-        <div>
-            <h5>{postInfo.name}</h5> 
-        </div>
-        
+        <Card>
+            <Title>{postInfo.name}</Title> 
+        </Card>   
     </div>
 );
 

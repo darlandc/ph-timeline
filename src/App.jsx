@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import TabGroup from './components/Tabs';
+import TabGroup from './components/tabs';
 import Home from './containers/home/index';
 
 console.log(1)
@@ -9,15 +9,12 @@ const App = () => {
     <div className="App">
       <header className="App-header">
         <p>Product Hunt</p>
-        <TabGroup/>
       </header>
       <main>
-      <Home />
+        <TabGroup/>
+        <Home />
       </main>
-      <div>
-
       </div>
-    </div>
   );
 }
 

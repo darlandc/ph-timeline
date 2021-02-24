@@ -1,13 +1,10 @@
 import React from 'react';
+import Post from './post';
 import { Query } from 'react-apollo';
-import gql from 'graphql-tag';
-
-import Post from './Post';
-
-import GET_POSTS from '../queries/index';
+import GET_POSTS_MOST_RECENT from '../queries/index';
 
 const PostList = () => (
-    <Query query={GET_POSTS}>
+    <Query query={GET_POSTS_MOST_RECENT}>
         {({loading, error, data}) => {
 
           let posts;
