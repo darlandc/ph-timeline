@@ -11,7 +11,6 @@ const App = () => {
         <p>Product Hunt</p>
       </header>
       <main>
-        <TabGroup/>
         <Home />
       </main>
       </div>

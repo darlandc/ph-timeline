@@ -5,9 +5,10 @@ import { Query } from 'react-apollo';
 import GET_POSTS_MOST_RECENT from '../queries/index';
 import client from '../client';
 import { ApolloProvider } from 'react-apollo';
+import TabGroup from './tabs';
 
 export default function InfinitList() {
-  const [query, setQuery] = useState('')
+  const [category, setCategory] = useState('')
   const [pageNumber, setPageNumber] = useState(1)
 
   const {
@@ -15,7 +16,7 @@ export default function InfinitList() {
     hasMore,
     loading,
     error
-  } = GetPaginationList(query, pageNumber)
+  } = GetPaginationList(category, pageNumber)
 
   const observer = useRef()
   const lastPostElementRef = useCallback(node => {
@@ -30,18 +31,22 @@ export default function InfinitList() {
   }, [loading, hasMore])
 
   function handleSearch(e) {
-    setQuery(e.target.value)
+    //y(e.target.value)
     setPageNumber(1)
   }
 
   return (
     <>
     <ApolloProvider client={client}>
+    <TabGroup/>
       <Query query={GET_POSTS_MOST_RECENT}>
         {({loading, error, data}) => {
 
           let posts;
           data ? posts = data.posts.edges : error = true;
+
+          {/* setCategory('MOST_RECENT');
+          setPageNumber(1) */}
 
             if (loading) return <p>Loading ...</p>;
             if (error) return <p>Error :(</p>;
@@ -53,17 +58,6 @@ export default function InfinitList() {
         }}
         </Query>
     </ApolloProvider>
-
-      {/* <input type="text" value={query} onChange={handleSearch}></input>
-      {posts.map((post, index) => {
-        if (posts.length === index + 1) {
-          return <div ref={lastPostElementRef} key={post}>{post}</div>
-        } else {
-          return <div key={post}>{post}</div>
-        }
-      })} */}
-      {/* <div>{loading && 'Loading...'}</div>
-      <div>{error && 'Error'}</div> */}
     </>
   )
 }

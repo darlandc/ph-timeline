@@ -30,16 +30,12 @@ const TabGroup = () => {
           <Tab
             key={type}
             active={active === type}
-            onClick={() => setActive(type)}
+            onClick={() => setActive(type) + console.log(type)}
           >
             {type}
           </Tab>
         ))}
       </ButtonGroup>
-      <p />
-      <p> Tab selected content: {active} </p>
-      <div>
-      </div>
     </>
   );
 }

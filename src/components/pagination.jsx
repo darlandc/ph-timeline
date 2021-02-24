@@ -3,7 +3,7 @@ import { Query } from 'react-apollo';
 import GET_POSTS_MOST_RECENT from '../queries/index';
 import Post from './post';
 
-export default function GetPaginationList(GET_POSTS_MOST_RECENT, pageNumber) {
+export default function GetPaginationList(category, pageNumber) {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
   const [posts, setPosts] = useState([])
@@ -11,9 +11,11 @@ export default function GetPaginationList(GET_POSTS_MOST_RECENT, pageNumber) {
 
   useEffect(() => {
     setPosts([])
-  }, [GET_POSTS_MOST_RECENT])
+  }, [category])
 
   useEffect(() => {
+
+
 
     // setPosts(prevPosts => {
     //   return [...new Set([...prevPosts, ...data.docs.map(b => b.title)])]
@@ -21,7 +23,7 @@ export default function GetPaginationList(GET_POSTS_MOST_RECENT, pageNumber) {
       
     console.log('WEEE!')
       
-  }, [GET_POSTS_MOST_RECENT, pageNumber])
+  }, [category, pageNumber])
 
   return { loading, error, posts, hasMore, }
 }
