@@ -1,20 +1,10 @@
 import React, { Component } from 'react';
-import { ApolloProvider } from 'react-apollo';
-import client from '../../client';
-import PostList from '../../components/list';
-
-console.log(3)
+import InfinitList from '../../components/infinitList';
 
 const Home = () => {
   return (
       <main>
-      <ApolloProvider client={client}>
-    <div className="container">
-      <div>
-        <PostList />
-      </div>
-    </div>
-  </ApolloProvider>
+        <InfinitList />
       </main>
   );
 }
