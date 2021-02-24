@@ -1,10 +1,9 @@
-import './App.css';
-
 import React, { Component } from 'react';
 import { ApolloProvider } from 'react-apollo';
 import client from './client';
 import PostList from './components/Posts/List';
 import TabGroup from './components/Tabs/Tabs';
+import Home from './containers/Home';
 
 console.log(1)
 
@@ -16,15 +15,11 @@ const App = () => {
         <TabGroup/>
       </header>
       <main>
-      <ApolloProvider client={client}>
-    <div className="container">
-      <div>
-        <PostList />
-        
-      </div>
-    </div>
-  </ApolloProvider>
+      <Home />
       </main>
+      <div>
+
+      </div>
     </div>
   );
 }

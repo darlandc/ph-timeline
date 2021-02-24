@@ -28,13 +28,10 @@ const Button = styled.button`
 `;
 
 
-const Post = (props) => (
+const Post = ({postInfo}) => (
     <div style={{'width': '100%', 'marginTop': '10px'}}>
         <div>
-            <h5>{props.tagline}</h5> 
-            <p>{props.thumbnail}</p>
-            <Button>test</Button>
-            <a href={props.url} ></a>
+            <h5>{postInfo.name}</h5> 
         </div>
         
     </div>

@@ -38,11 +38,12 @@ const PostList = () => (
         {({loading, error, data}) => {
             if (loading) return <p>Loading ...</p>;
             if (error) return <p>Error :(</p>;
-
-           const allPosts = data.posts.edges;
-return null
-
-
+              const posts = data.posts.edges;
+              let list = posts.map(post => 
+                <Post key={post.node.name} postInfo={post.node}/>
+              );
+            if(data) return list;
+          
         }}
     </Query>
 );
