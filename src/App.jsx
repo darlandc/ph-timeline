@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import TabGroup from './components/tabs';
-import Home from './containers/home';
+import Home from './containers/home/index';
 
 const App = () => {
   return (
