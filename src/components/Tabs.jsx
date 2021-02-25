@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import Test from './test';
 
 const Tab = styled.button`
   font-size: 20px;

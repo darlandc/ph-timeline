@@ -8,8 +8,12 @@ const Title = styled.h1`
 `;
 
 const Card = styled.section`
-  padding: 0;
-  border: 1px solid red;
+  padding: 10px 0;
+  box-shadow: 1px 5px 5px #EEE;
+  border-radius: 6px;
+  border: 1px solid #EEE;
+  margin: 0 5px;
+  width: 500px;
 `;
 
 const Post = ({postInfo}) => (

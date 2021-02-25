@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Query } from 'react-apollo';
-import GET_POSTS_MOST_RECENT from '../queries/index';
+import GET_POSTS_MOST_RECENT from '../queries/recent';
+import GET_POSTS_MOST_POPULAR from '../queries/popular';
 import Post from './post';
 
 export default function GetPaginationList(category, pageNumber) {
@@ -15,13 +16,9 @@ export default function GetPaginationList(category, pageNumber) {
 
   useEffect(() => {
 
-
-
     // setPosts(prevPosts => {
     //   return [...new Set([...prevPosts, ...data.docs.map(b => b.title)])]
     // })
-      
-    console.log('WEEE!')
       
   }, [category, pageNumber])
 
