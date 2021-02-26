@@ -1,0 +1,27 @@
+query GET_POSTS {
+        query {
+          posts(first: 100) {
+            pageInfo{
+              endCursor
+            }
+            edges {
+              cursor,
+              node {
+                id,
+                tagline,
+                url,
+                thumbnail{
+                  url
+                }
+                user{
+                  username,
+                },
+                votesCount,
+                commentsCount,
+                name,
+                createdAt
+              }
+            }
+          }
+        }
+}

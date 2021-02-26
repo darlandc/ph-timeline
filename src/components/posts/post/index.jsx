@@ -24,7 +24,4 @@ const Post = ({postInfo}) => (
     </div>
 );
 
-
-
 export default Post;
-
