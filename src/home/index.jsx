@@ -24,13 +24,7 @@ export class Home extends React.Component {
     selectedTab: 'NEWEST',
     pages: 0 
   };
-
-  // constructor(props){
-  //   super(props)
-  //   this.changeOrder.bind(this);
-  //   console.log('home rendering')
-  // }
-
+  
   changeOrder(order){
     this.setState({
       selectedTab: order,
@@ -40,74 +34,75 @@ export class Home extends React.Component {
   }
 
   GET_NEWEST = gql`
-  query {
-    posts(order: NEWEST) {
-      pageInfo{
-        endCursor
-      }
-      edges {
-        cursor,
-        node {
-          id,
-          tagline,
-          url,
-          thumbnail{
-            url
+    query {
+      posts(order: NEWEST) {
+        pageInfo{
+          endCursor
+        }
+        edges {
+          cursor,
+          node {
+            id,
+            tagline,
+            url,
+            thumbnail{
+              url
+            }
+            user{
+              username,
+            },
+            votesCount,
+            commentsCount,
+            name,
+            createdAt
           }
-          user{
-            username,
-          },
-          votesCount,
-          commentsCount,
-          name,
-          createdAt
         }
       }
     }
-  }
   `;
 
-  GET_RANKING = gql`
-  query {
-    posts(order: RANKING) {
-      pageInfo{
-        endCursor
-      }
-      edges {
-        cursor,
-        node {
-          id,
-          tagline,
-          url,
-          thumbnail{
-            url
+  GET_POPULAR = gql`
+    query {
+      posts(order: VOTES) {
+        pageInfo{
+          endCursor
+        }
+        edges {
+          cursor,
+          node {
+            id,
+            tagline,
+            url,
+            thumbnail{
+              url
+            }
+            user{
+              username,
+            },
+            votesCount,
+            commentsCount,
+            name,
+            createdAt
           }
-          user{
-            username,
-          },
-          votesCount,
-          commentsCount,
-          name,
-          createdAt
         }
       }
     }
-  }
   `;
 
   render(){
     return (
       <>
-      <button onClick={()=> this.changeOrder('RANKING')}>Most Popular</button>
+  
       <button onClick={()=> this.changeOrder('NEWEST')}>Most Recent</button>
+      <button onClick={()=> this.changeOrder('POPULAR')}>Most Popular</button>
         
       {console.log(this.state.selectedTab)}
 
         <ApolloProvider client={client}>
 
-          {this.state.selectedTab == `RANKING` && 
+          {this.state.selectedTab == `POPULAR` && 
                   <PostWrapper>
-                    <Query query={this.GET_RANKING}>
+                    <Query query={this.GET_POPULAR}>
                       {({loading, error, data}) => {
                         let posts;
                         data ? posts = data.posts.edges : error = true;    
