@@ -20,26 +20,56 @@ export class Home extends React.Component {
 
   type;
   query;
+  state = {
+    selectedTab: 'NEWEST',
+    pages: 0 
+  };
 
-  constructor(props){
-    super(props)
-    this.changeOrder.bind(this);
-    
-    console.log('home rendering')
-    this.state = {
-      selectedTab: 0,
-      pages: 0 
-    };
-  }
+  // constructor(props){
+  //   super(props)
+  //   this.changeOrder.bind(this);
+  //   console.log('home rendering')
+  // }
 
   changeOrder(order){
-    this.order = order;
-    console.log(this.order);
+    this.setState({
+      selectedTab: order,
+      pages: 0  
+    });
+    console.log('this.state', this.state)
   }
 
-  GET_POSTS = gql`
+  GET_NEWEST = gql`
   query {
-    posts(order: RANKING, first: 50) {
+    posts(order: NEWEST) {
+      pageInfo{
+        endCursor
+      }
+      edges {
+        cursor,
+        node {
+          id,
+          tagline,
+          url,
+          thumbnail{
+            url
+          }
+          user{
+            username,
+          },
+          votesCount,
+          commentsCount,
+          name,
+          createdAt
+        }
+      }
+    }
+  }
+  `;
+
+  GET_RANKING = gql`
+  query {
+    posts(order: RANKING) {
       pageInfo{
         endCursor
       }
@@ -70,24 +100,45 @@ export class Home extends React.Component {
       <>
       <button onClick={()=> this.changeOrder('RANKING')}>Most Popular</button>
       <button onClick={()=> this.changeOrder('NEWEST')}>Most Recent</button>
+        
+      {console.log(this.state.selectedTab)}
 
         <ApolloProvider client={client}>
-        {/* <DisplayList type={this.type}/> */}
-          <PostWrapper>
-              <Query query={this.GET_POSTS}>
-                {({loading, error, data}) => {
-                  let posts;
-                  data ? posts = data.posts.edges : error = true;    
-                    if (loading) return <p>Loading ...</p>;
-                    if (error) return <p>Error :(</p>;
-                      let list = posts.map(post => 
-                        <Post key={post.node.name} postInfo={post.node}/>,
-                      );
-                      console.log(list.length)
-                    if(data) return list;        
-                }}
-              </Query>
-            </PostWrapper>
+
+          {this.state.selectedTab == `RANKING` && 
+                  <PostWrapper>
+                    <Query query={this.GET_RANKING}>
+                      {({loading, error, data}) => {
+                        let posts;
+                        data ? posts = data.posts.edges : error = true;    
+                          if (loading) return <p>Loading ...</p>;
+                          if (error) return <p>Error :(</p>;
+                            let list = posts.map(post => 
+                              <Post key={post.node.name} postInfo={post.node}/>,
+                            );
+                            console.log(list.length)
+                          if(data) return list;        
+                      }}
+                    </Query>
+                  </PostWrapper>
+          }
+          {this.state.selectedTab == `NEWEST` && 
+                <PostWrapper>
+                    <Query query={this.GET_NEWEST}>
+                      {({loading, error, data}) => {
+                        let posts;
+                        data ? posts = data.posts.edges : error = true;    
+                          if (loading) return <p>Loading ...</p>;
+                          if (error) return <p>Error :(</p>;
+                            let list = posts.map(post => 
+                              <Post key={post.node.name} postInfo={post.node}/>,
+                            );
+                            console.log(list.length)
+                          if(data) return list;        
+                      }}
+                    </Query>
+                  </PostWrapper>
+          }
         </ApolloProvider>
       </>
     )
